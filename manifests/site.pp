@@ -1,12 +1,12 @@
 #Quick Manifest to stand up a demo Puppet Master
 class base {
-#  include ssh
   include puppet
   include ohmyzsh
 
   service { 'iptables':
     ensure => 'stopped',
   }
+
   $vagrant = 'vagrant'
   $root = 'root'
 
