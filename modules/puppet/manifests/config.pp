@@ -8,6 +8,5 @@ class puppet::config {
     owner   => 'puppet',
     group   => 'puppet',
     require => Class [ 'puppet::install' ],
-    notify  => Class [ 'puppet::service' ],
   }
 }
