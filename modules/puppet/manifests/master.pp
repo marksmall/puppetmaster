@@ -1,4 +1,5 @@
-class puppet::master($apache = false) {
+class puppet::master {
+  $apache = 'true'
   notify { "Apache val is: ${apache}": }
   include puppet
   include puppet::params
@@ -10,12 +11,13 @@ class puppet::master($apache = false) {
   if $apache == 'true' {
     class {'passenger': }  
 
-    class { 'apache':
-      default_mods  => false,
-      default_vhost => false,
-      mpm_module    => 'worker',
-    }
+    # class { 'apache':
+    #   default_mods  => false,
+    #   default_vhost => false,
+    #   mpm_module    => 'worker',
+    # }
 
+    include apache
     include apache::mod::deflate
     include apache::mod::status
     include apache::mod::mime
@@ -54,6 +56,7 @@ class puppet::master($apache = false) {
 
     $puppet_dir = '/var/www/html/puppetmasterd'
     file { [ "${puppet_dir}",
+             "${puppet_dir}/production",
              "${puppet_dir}/public",
              "${puppet_dir}/tmp" ]:
                ensure  => directory,
@@ -82,6 +85,12 @@ class puppet::master($apache = false) {
       notify  => Service['httpd'],
     }
 
+    file { '/etc/sysconfig/puppet':
+      ensure  => 'present',
+      content => template('puppet/etc/sysconfig/puppet.erb'),
+    }
+
+    
     # service { "puppetmaster":
     #   ensure     => stopped,
     #   enable     => false,
