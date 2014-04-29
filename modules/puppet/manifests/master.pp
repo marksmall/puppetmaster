@@ -6,7 +6,7 @@ class puppet::master {
     ensure => installed,
   }
 
-  class {'passenger': }  
+#  class {'passenger': }  
 
   # class { 'apache':
   #   default_mods  => false,
@@ -26,20 +26,20 @@ class puppet::master {
   }
 
   $default_home = '/var/www/html'
-  apache::vhost { "${fqdn}":
-    port          => 80,
-    docroot       => $default_home,
-    serveradmin   => "root@$fqdn",
-    priority      => '14',
-    default_vhost => true,
-    directories   => [{
-      provider    => 'directory',
-      path        => $default_home,
-      allow       => "from all", # Fix this to use real subnets.
-      deny        => 'from all',
-      order       => 'deny,allow',
-    }],
-  }
+  # apache::vhost { "${fqdn}":
+  #   port          => 80,
+  #   docroot       => $default_home,
+  #   serveradmin   => "root@$fqdn",
+  #   priority      => '14',
+  #   default_vhost => true,
+  #   directories   => [{
+  #     provider    => 'directory',
+  #     path        => $default_home,
+  #     allow       => "from all", # Fix this to use real subnets.
+  #     deny        => 'from all',
+  #     order       => 'deny,allow',
+  #   }],
+  # }
 
   File {
     owner => "root",
@@ -56,16 +56,6 @@ class puppet::master {
     require => Package['puppet-server'],
   }
   
-  file { '/etc/httpd/conf.d/puppetmaster.conf':
-    ensure  => 'present',
-    content => template('puppet/puppetmaster.conf.erb'),
-    require => [
-      Package['httpd'],
-      Exec['puppetmaster-run-once'],
-    ],
-    notify  => Service['httpd'],
-  }
-
   file { "${puppet_dir}/config.ru":
     ensure  => 'present',
     owner   => 'puppet',
@@ -111,8 +101,23 @@ class puppet::master {
     command => '/usr/sbin/puppetdb ssl-setup',
     require => [
       File['/etc/httpd/conf.d/puppetmaster.conf'],
+#       Class['dashboard'],
     ],
     notify => Service[ 'puppetdb' ],
   }
 
+
+  class {'dashboard':
+    dashboard_ensure          => 'present',
+    dashboard_user            => 'puppet-dbuser',
+    dashboard_group           => 'puppet-dbgroup',
+    dashboard_password        => 'changeme',
+    dashboard_db              => 'dashboard_prod',
+    dashboard_charset         => 'utf8',
+    dashboard_site            => "${fqdn}",
+    dashboard_port            => '8082',
+    mysql_root_pw             => 'changemetoo',
+    passenger                 => true,
+#    passenger_install         => false,
+  }
 }
