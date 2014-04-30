@@ -21,7 +21,7 @@ class base {
 
 node 'puppetmaster.edina.ac.uk' {
   include base
-  include  puppet::master
+  include puppet::master
 }
 
 node 'puppetagent.edina.ac.uk' {
