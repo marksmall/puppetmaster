@@ -8,13 +8,12 @@ class puppet::master {
 
 #  class {'passenger': }  
 
-  # class { 'apache':
-  #   default_mods  => false,
-  #   default_vhost => false,
-  #   mpm_module    => 'worker',
-  # }
+  class { 'apache':
+    default_mods  => false,
+    default_vhost => false,
+    mpm_module    => 'worker',
+  }
 
-  include apache
   include apache::mod::deflate
   include apache::mod::status
   include apache::mod::mime
