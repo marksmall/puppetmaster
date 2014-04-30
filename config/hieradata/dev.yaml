@@ -1,0 +1,8 @@
+---
+##DEV VERSION
+# used by the capabilities generation
+legend_root_url: "http://wyvis.edina.ac.uk/legend_icons"
+clive_root_url: "http://dm-services.edina.ac.uk/clive/clive?"
+
+# Overriding property in common.yaml
+cadcorp_wsdl_host: "http://lui.edina.ac.uk"

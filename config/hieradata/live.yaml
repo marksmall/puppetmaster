@@ -1,0 +1,8 @@
+---
+##LIVE VERSION
+# used by the capabilities generation
+legend_root_url: "http://digimap.edina.ac.uk/legend_icons"
+clive_root_url: "http://mapserver.edina.ac.uk/clive/clive?"
+
+# Overriding property in common.yaml
+cadcorp_wsdl_host: "http://assynt1.edina.ac.uk,http://assynt2.edina.ac.uk,http://assynt3.edina.ac.uk,http://culmor1-at.edina.ac.uk,http://culmor2-at.edina.ac.uk"

@@ -1,0 +1,52 @@
+---
+# host + port + path must form a valid url
+# NOTE the / at the start of path
+# This is a comma separated list of hostnames (NOTE: This should be overriden in environment specific file e.g. dev.yaml)
+cadcorp_wsdl_host: "http://lui.edina.ac.uk"
+
+cadcorp_wsdl_path: "/GeognoSIS/GeognoSIS.wsdl"
+cadcorp_request_path: "/OgcService/WMS.impl?"
+
+# Ports for each product (matches geognosis instance port) 
+mastermap_port: "4330"
+geology50k_port: "4331"
+geology250k_port: "4351"
+geology625k_port: "4352"
+geology625k_gb_port: "4353"
+raster10k_port: "4332"
+historic_port: "4333"
+strategi_port: "4334"
+strategi_vm_port: "4358"
+midscale_port: "4335"
+midscale_vm_port: "4354"
+mastermap_plan_port: "4336"
+codepoint_port: "4337"
+raster25k_port: "4338"
+raster50k_port: "4339"
+miniscale_port: "4340"
+gb_port: "4341"
+cohabit_port: "4342"
+profile_port: "4343"
+codepoint_query_port: "4337"
+marine_port: "4355"
+vml_port: "4359"
+vml_plan_port: "4362"
+vml_street_port: "4363"
+vml_raster10k_port: "4364"
+fiona_port: "4344"
+lcm_port: "4361"
+
+# Don't delete these - need for testing
+schools_small_scale_port: "4345"
+schools_raster50k_port: "4346"
+schools_raster25k_port: "4347"
+schools_raster10k_port: "4348"
+schools_mastermap2500_port: "4349"
+schools_mastermap1250_port: "4350"
+
+
+cadcorp_swd_path: "G:/swds/"
+
+# Temp dir for writing annotation data if there is an exception
+tmp_dir: "/tmp/"
+

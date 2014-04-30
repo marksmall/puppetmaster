@@ -46,6 +46,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       puppet.manifest_file  = "site.pp"
       puppet.module_path = "modules"
       puppet.options = "--verbose --debug --environment dev"
+
+      # Puppet 3 only.
+      puppet.hiera_config_path = "config/hiera.yaml"
+      puppet.working_directory = "/vagrant"
     end
   end
 
@@ -91,6 +95,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       puppet.manifest_file  = "site.pp"
       puppet.module_path = "modules"
       puppet.options = "--verbose --debug --environment dev"
+
+      # Puppet 3 only.
+      puppet.hiera_config_path = "config/hiera.yaml"
+      puppet.working_directory = "/vagrant"
     end
   end
 end
