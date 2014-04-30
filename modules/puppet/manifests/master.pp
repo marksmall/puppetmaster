@@ -89,22 +89,7 @@ class puppet::master {
       Package["puppet-server"],
       File["/etc/puppet/puppet.conf"],
     ],
-  }          
-
-  class { 'puppetdb':
-    require => Package[ 'puppetdb-terminus' ],
   }
-  class { 'puppetdb::master::config': }
-  
-  exec { 'puppetdb ssl setup':
-    command => '/usr/sbin/puppetdb ssl-setup',
-    require => [
-      File['/etc/httpd/conf.d/puppetmaster.conf'],
-#       Class['dashboard'],
-    ],
-    notify => Service[ 'puppetdb' ],
-  }
-
 
   class {'dashboard':
     dashboard_ensure          => 'present',
